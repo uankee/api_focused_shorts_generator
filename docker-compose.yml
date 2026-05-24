@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  shorts-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: moviepy-shorts-generator
+    tty: true
+    stdin_open: true 
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./inputs:/app/inputs 
+      - ./music_library:/app/music_library
+      - ./ready_shorts:/app/ready_shorts
+      - ./fonts:/app/fonts
+    working_dir: /app
+    command: python main.py
